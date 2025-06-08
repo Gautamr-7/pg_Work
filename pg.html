@@ -798,6 +798,124 @@
 .green-flink:hover {
   text-decoration: underline;
 }
+.flink-footer-themed {
+  margin-top: 60px;
+  padding: 40px 20px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 -10px 25px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.footer-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.flink-brand {
+  text-decoration: none;
+}
+
+.flink-text {
+  font-size: 32px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #38a169 0%, #2f855a 100%); /* green gradient */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.flink-email a {
+  color: #2f855a;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.flink-email a:hover {
+  text-decoration: underline;
+}
+
+.flink-note {
+  font-size: 14px;
+  color: #4a5568;
+  margin-top: 8px;
+}
+
+.flink-copyright {
+  font-size: 13px;
+  color: #718096;
+  margin-top: 20px;
+}
+.flink-footer-themed {
+  margin-top: 0 !important;
+}
+
+.hostels-container {
+  margin-bottom: 0 !important;
+}
+
+.page-section:last-child {
+  margin-bottom: 0 !important;
+}
+
+body {
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+.flink-note a {
+  color: #2f855a;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.flink-note a:hover {
+  text-decoration: underline;
+}
+#scrollUpBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
+  background-color: white;
+  color: black;
+  border: 1px solid #ccc;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 44px;
+  text-align: center;
+  cursor: pointer;
+  display: none;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  transition: opacity 0.3s ease, transform 0.2s ease;
+  padding: 0; /* important! */
+}
+.know-more-btn {
+  margin-top: 20px;
+  display: inline-block;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 10px 18px;
+  border-radius: 20px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 10px rgba(102, 126, 234, 0.2);
+  width: fit-content;
+}
+
+.know-more-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(102, 126, 234, 0.3);
+}
+
     </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-6VSTV7W855"></script>
@@ -812,13 +930,14 @@
 <body>
     <div class="container">
         <header class="header">
-            <div class="logo-block">
-  <div class="logo-line">
-    <span class="emoji">🏠</span>
-    <span class="logo-text gradient-heading">Hostel Finder</span>
-  </div>
-  <div class="tagline">An initiative by <span class="flink-name">FLINK</span></div>
-</div>
+        <div class="logo-block" onclick="showSection('home')" style="cursor: pointer;">
+        <div class="logo-line">
+        <span class="emoji">🏠</span>
+        <span class="logo-text gradient-heading">Hostel Finder</span>
+        </div>
+        <div class="tagline">An initiative by <span class="flink-name">FLINK</span></div>
+        </div>
+
             <nav>
                 <ul class="nav-menu">
                     <li onclick="showSection('home')">Home</li>
@@ -1044,6 +1163,7 @@
                         <div class="hostel-amenities">
                             ${hostel.amenities.map(amenity => `<span class="amenity">${amenity}</span>`).join('')}
                         </div>
+                        <div class="know-more-btn">Know More →</div>
                     </div>
                 </div>
             `).join('');
@@ -1195,7 +1315,39 @@ function animatePlaceholder() {
 }
 
 animatePlaceholder();
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+window.addEventListener('scroll', () => {
+  const btn = document.getElementById('scrollUpBtn');
+  if (window.scrollY > 200) {
+    btn.style.display = 'block';
+  } else {
+    btn.style.display = 'none';
+  }
+});
 
     </script>
+<button onclick="scrollToTop()" id="scrollUpBtn" title="Go to top">⬆</button>
+
+    <footer class="flink-footer-themed">
+  <div class="footer-container">
+    <a href="https://cute-fenglisu-fdc0cc.netlify.app" target="_blank" class="flink-brand">
+      <span class="flink-text">FLINK</span>
+    </a>
+    <p class="flink-email">
+      <a href="mailto:flinkai10@gmail.com">flinkai10@gmail.com</a>
+    </p>
+    <p class="flink-note">
+        <a href="#" onclick="showSection('contact'); return false;">Contact us</a> for queries or collaborations
+    </p>
+
+    <p class="flink-copyright">
+      &copy; 2025 FLINK. All rights reserved.
+    </p>
+  </div>
+</footer>
+
 </body>
 </html>
