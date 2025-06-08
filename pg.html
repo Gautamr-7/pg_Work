@@ -915,6 +915,31 @@ body {
   transform: translateY(-2px);
   box-shadow: 0 6px 15px rgba(102, 126, 234, 0.3);
 }
+/* Mobile dropdown menu styles */
+.nav-menu.mobile-open {
+  display: flex !important;
+  flex-direction: column;
+  position: absolute;
+  top: 100%; /* ensures dropdown goes downward */
+  right: 0;
+  background: rgba(255, 255, 255, 0.95);
+  width: 200px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+  border-radius: 12px;
+  animation: dropdownFade 0.3s ease-out forwards;
+  z-index: 1000;
+}
+
+@keyframes dropdownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
     </style>
 <!-- Google tag (gtag.js) -->
@@ -1216,41 +1241,10 @@ body {
         }
 
         function toggleMobileMenu() {
-            const navMenu = document.querySelector('.nav-menu');
-            // Basic toggle:
-            if (navMenu.style.display === 'flex' || getComputedStyle(navMenu).display === 'flex' && window.innerWidth > 768) {
-                 // This condition is tricky due to initial 'none' for mobile, and 'flex' for desktop.
-                 // A more robust solution would use classes.
-                 // For now, let's assume it's for mobile toggle logic.
-                 if (navMenu.style.display === 'block') {
-                     navMenu.style.display = 'none';
-                 } else {
-                     navMenu.style.display = 'block'; 
-                     // Add more styles for mobile menu like position absolute, full width, etc.
-                     // Example:
-                     // navMenu.style.position = 'absolute';
-                     // navMenu.style.top = document.querySelector('.header').offsetHeight + 'px';
-                     // navMenu.style.left = '0';
-                     // navMenu.style.width = '100%';
-                     // navMenu.style.background = 'rgba(255, 255, 255, 0.95)';
-                     // navMenu.style.flexDirection = 'column';
-                     // navMenu.style.gap = '0';
-                     // navMenu.querySelectorAll('li').forEach(li => li.style.textAlign = 'center');
-                 }
-            } else { // Desktop view where navMenu is 'flex'
-                 if (window.innerWidth <= 768) { // Only toggle if on mobile view
-                    if (navMenu.style.display === 'block') { // check if mobile menu is open
-                        navMenu.style.display = 'none';
-                    } else {
-                        navMenu.style.display = 'block'; // Open mobile menu
-                        // Apply mobile menu styles as above if needed
-                    }
-                 }
-            }
-            // The above is a placeholder. A proper mobile menu needs more CSS and JS logic for class toggling.
-            // For now, the original alert:
-            // alert('Mobile menu toggle - you can implement a slide-out menu here');
-        }
+  const navMenu = document.querySelector('.nav-menu');
+  navMenu.classList.toggle('mobile-open');
+}
+
 
         document.getElementById('searchInput').addEventListener('input', function(e) {
             if (currentSection === 'home') { // Only search if on home section
@@ -1267,15 +1261,12 @@ body {
             }
             // For mobile menu to hide on link click (if it were a proper overlay)
             document.querySelectorAll('.nav-menu li').forEach(item => {
-                item.addEventListener('click', () => {
-                    if (window.innerWidth <= 768) {
-                        const navMenu = document.querySelector('.nav-menu');
-                        if (navMenu.style.display === 'block') { // if mobile menu is open
-                            navMenu.style.display = 'none'; // close it
-                        }
-                    }
-                });
-            });
+  item.addEventListener('click', () => {
+    const navMenu = document.querySelector('.nav-menu');
+    navMenu.classList.remove('mobile-open');
+  });
+});
+
         });
         const placeholderTexts = [
   "Search by hostel name...",
